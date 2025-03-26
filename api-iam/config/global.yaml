@@ -1,0 +1,163 @@
+# nacos连接信息配置, 如果不连接nacos则不需要
+nacos:
+  # 主机地址
+  host: "127.0.0.1"
+  # 端口号, 数字类型
+  port: 8848
+  # nacos的主页路径
+  path: "/nacos"
+  # 账号名
+  username: "nacos"
+  # 密码
+  password: "nacos"
+  # 名称空间
+  tenant: "scripts"
+  # 组名
+  group: "DEFAULT_GROUP"
+  # 主配置文件ID
+  dataid_global: "openldapui-iam.yaml"
+  # 其他配置文件列表, 将被存储在内存键值数据库中, 这里的key对应内存键值数据库中的键名, 这里的value对应nacos中的dataid
+  dataid_other_map:
+
+# 以下所有配置尽在-m为local时生效
+
+local:
+  # 其他配置文件列表, 将被存储在内存键值数据库中, 这里的key对应内存键值数据库中的键名, 这里的value对应文件名, 应该与主配置文件在同一目录下
+  config_other_map:
+
+# 全局数据库配置, 修改这个需要重启应用才能生效
+database:
+  host: 127.0.0.1
+  port: 3306
+  user: devops
+  password: devops
+  db: devops
+  maxconnections: 5
+  charset: utf8
+
+# redis配置, 修改需要重启才能生效
+redis:
+  # 选择什么模式, 支持集群cluster和单实例src
+  select: src
+  # 超时时间
+  timeout: 5
+  # 单实例配置, 不起用可以不配置
+  src:
+    host: 127.0.0.1
+    port: 6379
+    db: 2
+    # 登录密码, 没有则留空
+    passwd:
+  # 集群配置, 不起用可以不配置
+  cluster:
+    startup_nodes:
+      - host: 127.0.0.1
+        port: 7000
+      - host: 127.0.0.1
+        port: 7001
+      - host: 127.0.0.1
+        port: 7002
+      - host: 127.0.0.1
+        port: 7003
+      - host: 127.0.0.1
+        port: 7004
+      - host: 127.0.0.1
+        port: 7005
+    # 集群没有db概念
+    # db: 2
+    # 登录密码, 没有则留空
+    passwd:
+
+
+# 用来导入用户的ldap服务器配置
+ldap:
+  # 是否开启, "on"|"off"
+  status: on
+  # 是否允许ldap用户修改自己的资料 "yes"|"no"
+  modify_oneself: yes
+  # 服务器地址
+  addr: 'ldap://127.0.0.1:389'
+  admin_dn: 'cn=furina,dc=teyvat,dc=com'
+  admin_password: '123456'
+
+
+# 用户jwt相关配置
+jwt:
+  # 过期时长, 分钟秒
+  exp_step: 60000
+  # 剩余秒数小于多久时续签
+  exp_renew: 30000
+  # 极限登录时长, 超过后不给续签
+  exp_max: 120000
+  # jwt的加密密钥前缀
+  secret_key_prefix: Snowy_Wind_
+
+# 登录验证设置
+auth:
+  # 多长时间内, 秒单位
+  limit_duration: 30
+  # 限制多少登录次数
+  limit_num: 6
+  # 注册时是否必须验证手机号, "yes"|"no"
+  must_tel: no
+  # 注册时是否必须验证邮箱, "yes"|"no"
+  must_email: yes
+  # 是否允许ldap用户以忘记密码形式修改密码, "yes"|"no"
+  forget_passwd_ldap: yes
+  # 登录,注册,忘记密码页的壁纸url, 可以是图床接口, 为空则采用web页面写死的壁纸
+  # https://t.mwm.moe/fj
+  # https://t.mwm.moe/pc
+  # https://imgapi.xl0408.top/index.php
+  # https://www.dmoe.cc/random.php
+  # https://img.paulzzh.com/touhou/random
+  # https://api.mtyqx.cn/tapi/random.php
+  # https://img.r10086.com/
+  # https://api.r10086.com/%E6%A8%B1%E9%81%93%E9%9A%8F%E6%9C%BA%E5%9B%BE%E7%89%87api%E6%8E%A5%E5%8F%A3.php?%E5%9B%BE%E7%89%87%E7%B3%BB%E5%88%97=%E5%8A%A8%E6%BC%AB%E7%BB%BC%E5%90%882
+  image_auth:
+
+# 发送短信接口需要的信息
+sms:
+  # 验证码的有效期, 单位秒
+  expire_up: 300
+  # 同一手机号的发送间隔, 单位秒
+  expire_interval: 60
+  # 当前选用哪个短信运营商
+  lsp_select: txy
+  # 支持的短信运营商配置
+  lsp_list:
+    # 阿里云相关配置
+    aly:
+      # 用到的ak和sk
+      access_key_id: xxx
+      access_key_secret: xxx
+      # 短信模板代码
+      template_code: xxx
+      # 短信签名, 注意不是签名id
+      sign_name: xxx
+    txy:
+      # 用到的ak和sk
+      access_key_id: xxx
+      access_key_secret: xxx
+      # 短信模板id
+      template_code: xxx
+      # 短信签名名字, 注意不是签名id
+      sign_name: xxx
+      # 使用的应用appid
+      appid: xxx
+
+# 发送邮件的配置信息
+email:
+  # 验证码的有效期, 单位秒
+  expire_up: 300
+  # 同一邮箱的发送间隔, 单位秒
+  expire_interval: 60
+  # 邮件服务器
+  smtp_server: 127.0.0.1
+  # 邮件服务器
+  smtp_port: 25
+  # 登录邮箱
+  from_addr: xxx@xxx.com
+  # 登录邮箱密码
+  from_passwd: 123456
+  # 是否启用ssl, "yes"|"no"
+  use_ssl: no
