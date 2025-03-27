@@ -2,6 +2,9 @@
 带有登录认证功能的openldap工具
 - 支持使用nacos托管配置文件
 - 支持使用redis缓存
+
+admin初始密码为123456
+
 ![57970d8cc62090e43464d129890bc09](https://github.com/user-attachments/assets/38a0eb87-0fc7-4cc1-8115-1bc5fc4ce454)
 ![image](https://github.com/user-attachments/assets/021e2c67-a5d5-4ee6-9b99-6857e80fd929)
 ![image](https://github.com/user-attachments/assets/f751a8d2-1b73-4d27-8326-aa7efd7afc07)
