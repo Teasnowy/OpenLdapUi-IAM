@@ -1,5 +1,6 @@
 # OpenLdapUi-IAM
 带有登录认证功能的openldap工具
+
 - 支持使用nacos托管配置文件
 - 支持使用redis缓存
 
@@ -54,7 +55,7 @@ mv dist ../web-iam-dist
 
 # 下载编译好的
 web-iam-dist目录就是编译好的前端静态文件, 可直接用于web服务器
-- [百度云盘下载](https://pan.baidu.com/s/1r_rwmZw-n_RqO5aMfbl8Uw?pwd=9127)
+- [百度云盘下载](https://pan.baidu.com/s/1PVYWnMvZTPaQjcw2MNclJw?pwd=9127)
 
 # 运行环境
 ### 后端部分
