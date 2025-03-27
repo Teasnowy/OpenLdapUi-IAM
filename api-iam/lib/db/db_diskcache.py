@@ -305,7 +305,3 @@ class kvdb_diskcache:
             dict_res[k] = self.read(k)
 
         return dict_res
-
-
-if __name__ == '__main__':
-    db = kvdb()
