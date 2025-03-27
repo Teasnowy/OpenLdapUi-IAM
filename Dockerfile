@@ -1,4 +1,4 @@
-# docker build --progress=plain -t openldapui-iam:v1 .
+# docker build --progress=plain -t qufudcj/openldapui-iam:v1 .
 FROM python:3.10.16-alpine3.21
 # 安装nginx
 RUN apk add --no-cache nginx && ls /etc/nginx
@@ -38,6 +38,8 @@ ENV LC_ALL=zh_CN.UTF-8
 RUN locale
 # 安装redis
 RUN apk add --no-cache redis
+# 是程序启用redis
+ENV UIIAM_DB_MODE=redis
 # 创建主目录
 RUN mkdir /openldapui-iam
 # 拷贝前端文件

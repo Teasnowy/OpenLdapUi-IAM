@@ -29,7 +29,7 @@
 |MYSQL_CHARSET|字符集||utf8
 |MYSQL_MAXCONNECTIONS|最大连接数||5
 
-
+### 运行容器
 ```shell
 # 在mysql数据库导入 api-iam/doc/init.sql
 mysql -uroot -pyourpasswd yourdb < api-iam/doc/init.sql
