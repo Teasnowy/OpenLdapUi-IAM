@@ -1,6 +1,6 @@
 # OpenLdapUi-IAM
 带有登录认证功能的openldap工具
-
+> [无认证版](https://github.com/Teasnowy/OpenLdapUi)
 - 支持使用nacos托管配置文件
 - 支持使用redis缓存
 
