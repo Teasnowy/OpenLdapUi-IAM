@@ -88,6 +88,19 @@ function ac_monitor() {
 function ac_start() {
     # 进入工作目录
     cd ${dir_work}
+
+    # 检查有无日志目录且有写权限, 没有则创建
+    if [ ! -w "${dir_log}" ];then
+        # 没有目录则创建目录（使用指定用户）
+        mkdir -p ${dir_log}
+        if [ ! -w "${dir_log}" ];then
+            log 4 "创建日志目录${dir_log}失败, 可能是因为权限问题, 请手动创建后再执行"
+            exit 6
+        else
+            log 0 "使用${cmd_user}用户创建了日志目录${dir_log}"
+        fi
+    fi
+
     # 检查进程是否已存在, 已存在则退出
     ac_monitor eq 0 "进程已存在, 放弃本次启动"
 
@@ -126,17 +139,7 @@ if [ "`whoami`" != "${cmd_user}" ];then
     exit 7
 fi
 
-# 检查有无日志目录且有写权限, 没有则创建
-if [ ! -w "${dir_log}" ];then
-    # 没有目录则创建目录（使用指定用户）
-    mkdir -p ${dir_log}
-    if [ ! -w "${dir_log}" ];then
-        log 4 "创建日志目录${dir_log}失败, 可能是因为权限问题, 请手动创建后再执行"
-        exit 6
-    else
-        log 0 "使用${cmd_user}用户创建了日志目录${dir_log}"
-    fi
-fi
+
 
 case ${1} in
     "start")
