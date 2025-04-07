@@ -2265,9 +2265,9 @@ import dingjiyu from '@/assets/svg/dingjiyu.svg'
                   </template>
                 </el-table-column>
               </el-table>
-              <span>{{data_req_dir_clone}}</span>
-              <span>{{data_rdn_clone_vertical}}</span>
-              <span>{{data_req_dir_clone_vertical}}</span>
+              <!--<span>{{data_req_dir_clone}}</span>-->
+              <!--<span>{{data_rdn_clone_vertical}}</span>-->
+              <!--<span>{{data_req_dir_clone_vertical}}</span>-->
               <el-button style="width: 100%;margin-top: 20px" @click="def_dir_clone_addline()" :icon="CirclePlus" text type="primary">新增一行</el-button>
               <!--{{data_req_dir_clone}}<br>-->
               <!--{{select_dir_info}}<br>-->
