@@ -26,26 +26,14 @@
   // 头像选择组件绑定的base64
   let user_photo_base64:Ref<string|null> = ref(null)
   // 注册时的请求信息
-  // let data_request_singup:req_singup = reactive({
-  //   "user_photo_base64": null,
-  //   "user_account": '',
-  //   "user_displayname": '',
-  //   "password": '',
-  //   "password_1": '',
-  //   "tel": '',
-  //   "email": '',
-  //   "code_tel_input": '',
-  //   "code_email_input": '',
-  //   "user_type": 'local'
-  // })
   let data_request_singup:req_singup = reactive({
     "user_photo_base64": null,
-    "user_account": 'shenhe',
-    "user_displayname": '申鹤',
-    "password": '963852aa',
-    "password_1": '963852aa',
+    "user_account": '',
+    "user_displayname": '',
+    "password": '',
+    "password_1": '',
     "tel": '',
-    "email": 'qufudcj@qq.com',
+    "email": '',
     "code_tel_input": '',
     "code_email_input": '',
     "user_type": 'local'
