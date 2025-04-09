@@ -48,7 +48,7 @@ mysql -uroot -pyourpasswd yourdb < api-iam/doc/init.sql
 # 拉取镜像
 docker pull qufudcj/openldapui-iam:v2
 # 酌情修改变量值
-docker run --name openldapuiiam -p 80:80 -p 997:997 -e MYSQL_HOST=x.x.x.x -e MYSQL_PORT=3306 -e MYSQL_USER=root -e MYSQL_PASSWORD=123456 -e MYSQL_DB=xxxx qufudcj/openldapui-iam:v2
+docker run -dit --name openldapuiiam -p 80:80 -p 997:997 -e MYSQL_HOST=x.x.x.x -e MYSQL_PORT=3306 -e MYSQL_USER=root -e MYSQL_PASSWORD=123456 -e MYSQL_DB=xxxx qufudcj/openldapui-iam:v2
 ```
 
 # 自行编译
