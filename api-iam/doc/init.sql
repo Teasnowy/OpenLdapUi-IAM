@@ -385,3 +385,5 @@ create table `sw_ldap_servers` (
   `date_update` datetime NOT NULL COMMENT '更新日期',
   PRIMARY KEY (`server_name`)
 );
+
+commit;
