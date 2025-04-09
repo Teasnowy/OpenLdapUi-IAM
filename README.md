@@ -88,6 +88,8 @@ mysql -uroot -pyourpasswd yourdb < api-iam/doc/init.sql
 /bin/bash server-openldapuiiam.sh stop
 # 重启
 /bin/bash server-openldapuiiam.sh restart
+# 或直接运行python脚本
+python OpenLdapUi-IAM-api.py -m nacos -d redis -p 997
 ```
 
 ### 前端部分
@@ -98,6 +100,15 @@ server  {
     index index.html index.htm index.php;
     # 你手动编译或下载编译好的web目录
     root  /xxxx/web-iam-dist;
+
+    location ~ .*\.(gif|jpg|jpeg|png|bmp|swf)$
+    {
+      expires      30d;
+    }
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
 
     # /api是后端接口
     location /api {
