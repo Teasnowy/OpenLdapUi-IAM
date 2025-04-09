@@ -247,7 +247,8 @@ import dingjiyu from '@/assets/svg/dingjiyu.svg'
       // rdn对象新增
       data_rdn_clone_vertical.value[rdn_num] = ''
       for (let [i, k] of data_req_dir_clone_vertical.value.entries()) {
-        data_req_dir_clone_vertical.value[i][rdn_num] = dn_attrs_new[data_req_dir_clone_vertical.value[i]['attr']]
+        let attr_name = data_req_dir_clone_vertical.value[i]['attr'] as string
+        data_req_dir_clone_vertical.value[i][rdn_num] = dn_attrs_new[attr_name]
       }
     }
     status_change_dir.value = false
@@ -450,7 +451,7 @@ import dingjiyu from '@/assets/svg/dingjiyu.svg'
   }
 
   // 新增一条dn
-  async function def_serverdir_add() {
+  async function def_serverdir_add(onlyone:boolean = false) {
     load_servers_get.value = true
     status_change_dir.value = true
     // 新dn
@@ -500,6 +501,10 @@ import dingjiyu from '@/assets/svg/dingjiyu.svg'
     status_change_dir.value = false
     // 再触发一次选择新建的dn, 在try内会导致过早触发导致点击不到数据
     def_dir_click_tmp(dn_new)
+    // 如果是仅创建
+    if (onlyone) {
+      status_win_create_dir.value = false
+    }
   }
 
   // 克隆多条dn
@@ -509,7 +514,8 @@ import dingjiyu from '@/assets/svg/dingjiyu.svg'
 
     // 如果当前是竖向排版, 则先将数据转化为横向
     if (!status_table_dir_clone_layout.value) {
-      def_change_clone_layout()
+      def_change_clone_layout(false)
+      console.log("仅将竖向数据转化为横向数据")
     }
 
     // 拼凑新条目的dn
@@ -529,7 +535,7 @@ import dingjiyu from '@/assets/svg/dingjiyu.svg'
     // return
     // 请求新增
     try {
-      // console.log("新增的dn: ", dn_new, data_add)
+      console.log("新增的dn: ", data_add)
       await getServer('/api/devops/ldapserver/obj/add', data_add)
       global_window("success", "成功新增 "+data_req_dir_clone.value.length+" 条dn")
       status_win_clone_dir.value = false
@@ -1502,13 +1508,17 @@ import dingjiyu from '@/assets/svg/dingjiyu.svg'
   }
 
   // 切换横竖排版的动作
-  function def_change_clone_layout() {
+  function def_change_clone_layout(change_status:boolean=true) {
     // status_table_dir_clone_horizontal=!status_table_dir_clone_horizontal
     if (status_table_dir_clone_layout.value) {
-      status_table_dir_clone_layout.value = false
+      if (change_status) {
+        status_table_dir_clone_layout.value = false
+      }
       def_clone_to_vertical()
     } else {
-      status_table_dir_clone_layout.value = true
+      if (change_status) {
+        status_table_dir_clone_layout.value = true
+      }
       def_clone_to_horizontal()
     }
   }
@@ -1550,7 +1560,8 @@ import dingjiyu from '@/assets/svg/dingjiyu.svg'
       }
       // 内层循环该rdn的attr
       for (let [index_attr, info_attr] of data_req_dir_clone_vertical.value.entries()) {
-        obj_tmp.attrs[info_attr['attr']] = info_attr[index_dn]
+        let attr_name = info_attr['attr'] as string
+        obj_tmp.attrs[attr_name] = info_attr[index_dn]
       }
       array_tmp.push(obj_tmp)
     }
@@ -1801,7 +1812,10 @@ import dingjiyu from '@/assets/svg/dingjiyu.svg'
                         <div v-if="Array.isArray(data_req_dir_add[k])" class="div_form_item" >
                           <div v-for="(vv, i) of v" class="div_item_input">
                             <el-input v-model="data_req_dir_add[k][i]" style="max-width: 400px;min-width: 250px"/>
-                            <el-button type="danger" plain text :icon="Minus" @click="def_dir_delline_add(k.toString(),i)" style="width: 20px"></el-button>
+                            <el-button
+                                type="danger" plain text :icon="Minus" @click="def_dir_delline_add(k.toString(),i)"  style="width: 20px"
+                                :disabled="data_req_dir_add[k].length == 1"
+                            />
                           </div>
                         </div>
                         <el-button v-if="Array.isArray(data_req_dir_add[k])" type="primary" plain text :icon="Plus" @click="def_dir_addline_add(k.toString())" style="width: 20px"/>
@@ -1859,7 +1873,7 @@ import dingjiyu from '@/assets/svg/dingjiyu.svg'
                   <h3 class="h3_right">创建</h3>
                   <div>
                     <el-button @click="status_win_create_dir=false" :loading="status_change_dir">取消</el-button>
-                    <el-button type="success" :loading="status_change_dir" @click="def_serverdir_add();status_win_create_dir=false">仅创建</el-button>
+                    <el-button type="success" :loading="status_change_dir" @click="def_serverdir_add(true)">仅创建</el-button>
                     <el-button type="success" :loading="status_change_dir" @click="def_serverdir_add()">创建并继续</el-button>
                   </div>
 
@@ -1998,7 +2012,7 @@ import dingjiyu from '@/assets/svg/dingjiyu.svg'
                       />
                       <!-- 属性减去一个值的减号 -->
                       <el-button
-                          :disabled="select_dir_dn.split('=')[0] == k && select_dir_dn.split(',')[0].split('=')[1] == data_req_dir_update[k][i]"
+                          :disabled="(select_dir_dn.split('=')[0] == k && select_dir_dn.split(',')[0].split('=')[1] == data_req_dir_update[k][i]) || data_req_dir_update[k].length ==1"
                           v-dcj="`编辑条目`" type="danger" plain text :icon="Minus" @click="def_dir_delline(k.toString(),i)" style="width: 20px"
                       />
                     </div>
@@ -2190,7 +2204,7 @@ import dingjiyu from '@/assets/svg/dingjiyu.svg'
                           />
                           <!-- :disabled="select_dir_dn.split('=')[0] == k && scope.row.dn == scope.row.attrs[k][i]" -->
                           <el-button
-                              type="danger" size="small" plain text :icon="Minus" @click="scope.row.attrs[k].splice(i,1)" style="width: 10px"
+                              type="danger" size="small" plain text :icon="Minus" @click="scope.row.attrs[k].splice(i,1)" style="width: 10px" :disabled="scope.row.attrs[k].length == 1"
                           />
                         </div>
                       </div>
@@ -2234,7 +2248,7 @@ import dingjiyu from '@/assets/svg/dingjiyu.svg'
                     </el-tooltip>
                     <el-button
                         size="small" type="danger" plain text :icon="Delete" style="width: 20px"
-                        @click="def_dir_clone_dn_del(k.toString())"
+                        @click="def_dir_clone_dn_del(Number(k))"
                     />
                   </template>
                   <template #default="scope">
@@ -2256,7 +2270,7 @@ import dingjiyu from '@/assets/svg/dingjiyu.svg'
                           />
                           <!-- :disabled="select_dir_dn.split('=')[0] == k && scope.row.dn == scope.row.attrs[k][i]" -->
                           <el-button
-                              type="danger" size="small" plain text :icon="Minus" @click="scope.row[k].splice(i,1)" style="width: 10px"
+                              type="danger" size="small" plain text :icon="Minus" @click="scope.row[k].splice(i,1)" style="width: 10px" :disabled="scope.row[k].length == 1"
                           />
                         </div>
                       </div>

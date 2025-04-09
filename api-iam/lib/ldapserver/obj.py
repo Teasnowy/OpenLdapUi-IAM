@@ -134,6 +134,9 @@ def add(data_req):
                     raise ZeroDivisionError(f"dn '{dn}' 已存在, 请检查: {status}, {result}")
 
                 for k, v in attrs.items():
+                    # 删除列表中的空值
+                    # if isinstance(v, list):
+                    #     v = [i for i in v if i]
                     data_ldap[dn][k] = v
 
             # print(data_ldap)
