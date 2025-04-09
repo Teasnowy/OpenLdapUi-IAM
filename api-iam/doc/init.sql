@@ -9,7 +9,7 @@ CREATE TABLE `sw_user` (
   `displayname` varchar(100) NOT NULL COMMENT '用户显示名',
   `rank` varchar(200) NOT NULL DEFAULT '初学乍练' COMMENT '用户称号, 定义在表sw_rank',
   `email` varchar(100) DEFAULT '' COMMENT '邮箱地址',
-  `tel` varchar(11) COMMENT '手机号码',
+  `tel` varchar(20) COMMENT '手机号码',
   `befrom` varchar(20) NOT NULL DEFAULT 'local' COMMENT '从何处创建, local:本地, ldap:ldap账号系统',
   `ldap_dn` varchar(200) COMMENT 'ldap用户对应的条目dn',
   `ldap_ou_name` varchar(20) COMMENT '如果是ldap用户, 对应哪个ou搜索表达式的ou_name, 在sw_ldap_ous表中',
