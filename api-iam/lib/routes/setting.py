@@ -29,13 +29,13 @@ def get_myinfo():
     return data_result
 
 
-@routes_setting.route('/api/manage/get/user/menus', methods=['post'], endpoint="管理-前端权限")
+@routes_setting.route('/api/manage/get/user/menus', methods=['post'], endpoint="管理-自己的前端权限")
 def get_my_menus():
     """
-    获取自己的详细信息(不含密码, 含头像)
+    获取自己的详细信息(不含密码, 含头像, 不能校验jwt)
     """
     # time.sleep(5)
-    data_result = interface_try(user_manage.get_my_menus, request)
+    data_result = interface_try(user_manage.get_my_menus, request, is_jwt=False)
     return data_result
 
 
