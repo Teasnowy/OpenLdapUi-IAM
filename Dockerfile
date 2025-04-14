@@ -1,4 +1,4 @@
-# docker build --progress=plain -t qufudcj/openldapui-iam:v2 .
+# docker build --progress=plain -t qufudcj/openldapui-iam:v3 .
 FROM python:3.10.16-alpine3.21
 # 安装nginx
 RUN apk add --no-cache nginx && ls /etc/nginx

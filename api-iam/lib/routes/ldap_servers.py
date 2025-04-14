@@ -14,7 +14,7 @@ def connect_get_all():
     """
     获取所有LDAP服务器
     """
-    data_result = interface_try(conn.get_all, request, is_jwt=False)
+    data_result = interface_try(conn.get_all, request)
     # time.sleep(2)
     return data_result
 
@@ -25,7 +25,7 @@ def connect_add():
     新增LDAP服务器
     """
     time.sleep(2)
-    data_result = interface_try(conn.add, request, is_jwt=False)
+    data_result = interface_try(conn.add, request)
     return data_result
 
 
@@ -35,7 +35,7 @@ def connect_update():
     更新一个LDAP服务器
     """
     time.sleep(2)
-    data_result = interface_try(conn.update, request, is_jwt=False)
+    data_result = interface_try(conn.update, request)
     return data_result
 
 
@@ -45,7 +45,7 @@ def connect_delete():
     删除一个LDAP服务器
     """
     time.sleep(2)
-    data_result = interface_try(conn.delete, request, is_jwt=False)
+    data_result = interface_try(conn.delete, request)
     return data_result
 
 
@@ -55,7 +55,7 @@ def object_getall():
     获取所有条目信息
     """
     # time.sleep(2)
-    data_result = interface_try(obj.get_all, request, is_jwt=False)
+    data_result = interface_try(obj.get_all, request)
     return data_result
 
 
@@ -65,7 +65,7 @@ def object_add():
     创建一个dn
     """
     # time.sleep(2)
-    data_result = interface_try(obj.add, request, is_jwt=False)
+    data_result = interface_try(obj.add, request)
     return data_result
 
 
@@ -75,7 +75,7 @@ def object_update():
     更新一个dn
     """
     # time.sleep(2)
-    data_result = interface_try(obj.update, request, is_jwt=False)
+    data_result = interface_try(obj.update, request)
     return data_result
 
 
@@ -85,7 +85,7 @@ def object_move():
     移动一个dn
     """
     # time.sleep(2)
-    data_result = interface_try(obj.move, request, is_jwt=False)
+    data_result = interface_try(obj.move, request)
     return data_result
 
 
@@ -95,7 +95,7 @@ def object_delete():
     批量删除dn
     """
     # time.sleep(2)
-    data_result = interface_try(obj.delete, request, is_jwt=False)
+    data_result = interface_try(obj.delete, request)
     return data_result
 
 
@@ -105,7 +105,7 @@ def object_export():
     批量删除dn
     """
     # time.sleep(2)
-    data_result = interface_try(obj.export, request, is_jwt=False)
+    data_result = interface_try(obj.export, request)
     return data_result
 
 
@@ -115,5 +115,5 @@ def object_upload():
     批量删除dn
     """
     # time.sleep(2)
-    data_result = interface_try(obj.upload, request, is_jwt=False)
+    data_result = interface_try(obj.upload, request)
     return data_result

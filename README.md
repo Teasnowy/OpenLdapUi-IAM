@@ -46,9 +46,9 @@ admin初始密码为123456
 # 在mysql数据库导入 api-iam/doc/init.sql
 mysql -uroot -pyourpasswd yourdb < api-iam/doc/init.sql
 # 拉取镜像
-docker pull qufudcj/openldapui-iam:v2
+docker pull qufudcj/openldapui-iam:v3
 # 酌情修改变量值
-docker run -dit --name openldapuiiam -p 80:80 -p 997:997 -e MYSQL_HOST=x.x.x.x -e MYSQL_PORT=3306 -e MYSQL_USER=root -e MYSQL_PASSWORD=123456 -e MYSQL_DB=xxxx qufudcj/openldapui-iam:v2
+docker run -dit --name openldapuiiam -p 80:80 -p 997:997 -e MYSQL_HOST=x.x.x.x -e MYSQL_PORT=3306 -e MYSQL_USER=root -e MYSQL_PASSWORD=123456 -e MYSQL_DB=xxxx qufudcj/openldapui-iam:v3
 ```
 
 # 自行编译

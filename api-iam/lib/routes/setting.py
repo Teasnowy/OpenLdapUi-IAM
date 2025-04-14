@@ -25,17 +25,17 @@ def get_myinfo():
     获取自己的详细信息(不含密码, 含头像)
     """
     # time.sleep(5)
-    data_result = interface_try(user_manage.get_myinfo, request, is_jwt=False)
+    data_result = interface_try(user_manage.get_myinfo, request)
     return data_result
 
 
-@routes_setting.route('/api/manage/get/user/menus', methods=['post'], endpoint="管理-自己的前端权限")
+@routes_setting.route('/api/manage/get/user/menus', methods=['post'], endpoint="管理-前端权限")
 def get_my_menus():
     """
     获取自己的详细信息(不含密码, 含头像)
     """
     # time.sleep(5)
-    data_result = interface_try(user_manage.get_my_menus, request, is_jwt=False)
+    data_result = interface_try(user_manage.get_my_menus, request)
     return data_result
 
 
@@ -98,7 +98,7 @@ def group_get():
     获取用户组
     """
     # time.sleep(5)
-    data_result = interface_try(group_manage.group_get, request, is_jwt=False)
+    data_result = interface_try(group_manage.group_get, request)
     return data_result
 
 
@@ -108,7 +108,7 @@ def group_create():
     新增用户组
     """
     # time.sleep(5)
-    data_result = interface_try(group_manage.group_create, request, is_jwt=False)
+    data_result = interface_try(group_manage.group_create, request)
     return data_result
 
 
@@ -118,7 +118,7 @@ def group_update():
     更新用户组
     """
     # time.sleep(5)
-    data_result = interface_try(group_manage.group_update, request, is_jwt=False)
+    data_result = interface_try(group_manage.group_update, request)
     return data_result
 
 
@@ -128,7 +128,7 @@ def group_delete():
     删除用户组
     """
     # time.sleep(5)
-    data_result = interface_try(group_manage.group_delete, request, is_jwt=False)
+    data_result = interface_try(group_manage.group_delete, request)
     return data_result
 
 
