@@ -5,10 +5,7 @@
   import {type res_login, type req_login, type req_singup, type res_user_init, type res_ok} from '@/api/itf_auth'
   import {before_router, router_left} from '@/router/router'
   import {userInfo} from "@/pinia/envs";
-  import {type LocationQueryValue, useRoute, useRouter} from 'vue-router'
 
-  let route = useRoute();
-  let router = useRouter()
 
   let user_info = userInfo()
 
@@ -126,10 +123,10 @@
       // app.use(dir)
 
       window_right("success", "欢迎归来, 我的大人")
-      await user_info.update_menus()
+      user_info.update_menus()
       await before_router()
-      //
-      def_is_to()
+      // 跳转到首页
+      window.location.replace('/');
       // await router_left.push('/').then(()=>{
       //   window.location.reload()
       // }).catch(()=>{})
@@ -183,30 +180,6 @@
     }
   }
 
-  // 检查URL中是否带有to参数, 有则跳转至对应的url
-  function def_is_to() {
-    // debugger
-    let to_url:string | null | LocationQueryValue[] = route.query.to
-    // console.log("url中带有参数: ", query_account)
-    if (to_url && typeof to_url == 'string') {
-      // 再看目标url在不在权限列表, 不在则跳转到首页
-      let list_menus = Object.keys(user_info.menus)
-      let to_path = to_url.replace(/\?.*$/, '') // 去掉问号后的参数部分
-      if (list_menus.includes(to_path)) {
-        console.log("跳转到原目标页: ", to_url)
-        // global_window('warning', "跳转到原目标页")
-        window.location.replace(to_url);
-      } else {
-        console.log("目标url不存在, 跳转到首页: ", to_url)
-        // global_window('warning', "跳转到首页")
-        window.location.replace('/');
-      }
-
-    } else {
-      // 跳转到首页
-      window.location.replace('/');
-    }
-  }
 
 </script>
 

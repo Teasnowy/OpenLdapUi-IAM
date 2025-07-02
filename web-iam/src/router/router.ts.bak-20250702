@@ -4,118 +4,20 @@ import passwd_forget from '@/pages/auth/passwd_forget.vue'
 import singup from '@/pages/auth/singup.vue'
 import Layout from '@/components/layout.vue'
 import Test from '@/pages/test.vue'
-import crontabs from '@/pages/devops/crontabs.vue'
-import envs from '@/pages/devops/envs.vue'
 import myInfo from '@/pages/manage/myInfo.vue'
 import setting from '@/pages/manage/setting.vue'
-import home from '@/pages/devops/home.vue'
 import ldap_group from '@/pages/manage/ldap_group.vue'
 import user_manage from '@/pages/manage/user_manage.vue'
 import rbac_manage from '@/pages/manage/rbac_manage.vue'
 import group_manage from '@/pages/manage/group_manage.vue'
 import menu_manage from '@/pages/manage/menu_manage.vue'
 import ldap_servers from '@/pages/devops/ldap_servers.vue'
-import dmpHtml from '@/pages/devops/dmpHtml.vue'
-import goodsPriceSync from '@/pages/devops/goodsPriceSync.vue'
-import helm from '@/pages/devops/helm.vue'
-import tidbShowLog from '@/pages/devops/tidbShowLog.vue'
-import searchLog from '@/pages/devops/searchLog.vue'
 import {userInfo} from "@/pinia/envs";
 import type {Directive} from "vue";
-import finebiDataSearch from '@/pages/devops/finebi_data_search.vue'
-import release_plan from '@/pages/devops/release_plan.vue'
 // import {userInfo} from "@/pinia/envs";
 
 
 const _router = [
-    {
-        // 自定义名字
-        name:'links',
-        // 自定义路径
-        path:'/home/links',
-        // 引用的组件
-        component:home,
-        meta: {
-            title: "雪风-首页"
-        },
-    },
-    {
-        // 自定义名字
-        name:'release-plan',
-        // 自定义路径
-        path:'/home/releasePlan',
-        // 引用的组件
-        component:release_plan,
-        meta: {
-            title: "运维-发版清单"
-        }
-    },
-    {
-        // 自定义名字
-        name:'dmp-html',
-        // 自定义路径
-        path:'/home/dmpHtml',
-        // 引用的组件
-        component:dmpHtml,
-        meta: {
-            title: "运维-营销平台前端同步"
-        }
-    },
-    {
-        // 自定义名字
-        name:'searchLog',
-        // 自定义路径
-        path:'/home/searchLog',
-        // 引用的组件
-        component:searchLog,
-        meta: {
-            title: "运维-冷日志下载"
-        }
-    },
-    {
-        // 自定义名字
-        name:'tidbShowLog',
-        // 自定义路径
-        path:'/home/tidbShowLog',
-        // 引用的组件
-        component:tidbShowLog,
-        meta: {
-            title: "运维-TIDB慢日志"
-        }
-    },
-    {
-        // 自定义名字
-        name:'helm',
-        // 自定义路径
-        path:'/home/helmModify',
-        // 引用的组件
-        component:helm,
-        meta: {
-            title: "运维-微服务chart包"
-        }
-    },
-    {
-        // 自定义名字
-        name:'goods-priceSync',
-        // 自定义路径
-        path:'/home/yewu/goodsPriceSync',
-        // 引用的组件
-        component:goodsPriceSync,
-        meta: {
-            title: "运维-业务修复"
-        }
-    },
-    {
-        // 自定义名字
-        name:'fineb-iDataSearch',
-        // 自定义路径
-        path:'/home/yewu/finebiDataSearch',
-        // 引用的组件
-        component:finebiDataSearch,
-        meta: {
-            title: "运维-业务修复"
-        }
-    },
     {
         // 自定义名字
         name:'ldap_servers',
@@ -128,44 +30,11 @@ const _router = [
         },
     },
     {
-        // 自定义名字
-        name:'home',
-        // 自定义路径
-        path:'/home/test',
-        // 引用的组件
-        component:Test,
-        meta: {
-            title: "雪风-test"
-        },
-    },
-    {
         name: 'myInfo',
         path: '/home/myInfo',
         component: myInfo,
         meta: {
             title: "雪风-我的信息"
-        },
-    },
-    {
-        // 自定义名字
-        name:'crontabInfo',
-        // 自定义路径
-        path:'/home/crontabInfo',
-        // 引用的组件
-        component:crontabs,
-        meta: {
-            title: "雪风-后台任务"
-        },
-    },
-    {
-        // 自定义名字
-        name:'envs',
-        // 自定义路径
-        path:'/home/envs',
-        // 引用的组件
-        component:envs,
-        meta: {
-            title: "雪风-后台数据"
         },
     },
     {
@@ -232,7 +101,7 @@ const router_left = createRouter({
         // 这里定义的是默认展示的组件, 称为重定向
         {
             path:'/',
-            redirect:'/home/links'
+            redirect:'/home/ldapServers'
         },
         {
             name: 'App',
@@ -240,17 +109,17 @@ const router_left = createRouter({
             component: Layout,
             // 页面信息
             children: [
-                {
-                    // 自定义名字
-                    name:'links',
-                    // 自定义路径
-                    path:'/home/links',
-                    // 引用的组件
-                    component:home,
-                    meta: {
-                        title: "雪风-首页"
-                    },
-                },
+                // {
+                //     // 自定义名字
+                //     name:'ldap_servers',
+                //     // 自定义路径
+                //     path:'/home/ldapServers',
+                //     // 引用的组件
+                //     component:ldap_servers,
+                //     meta: {
+                //         title: "雪风-LDAP远程管理"
+                //     },
+                // },
             ]
         },
         {
@@ -308,9 +177,8 @@ async function before_router() {
     console.log("路由表从pinia获取了一次权限信息", res_menu)
     const _menu = Object.keys(res_menu)
     // 定义白名单, 所有用户都强制有这个用户的权限
-    const list_white_path_houduan = ['/', '/home/searchLog', '/home/links']
+    const list_white_path_houduan = ['/', '/home/ldapServers']
     // console.log("获取到路由: ", _menu)
-    // 筛选出有权限的路由, 在白名单就加入, 在后端返回的_menu中也加入
     const last_menu = _router.filter(item => {
         if (list_white_path_houduan.includes(item.path)) {
             return true
@@ -318,27 +186,15 @@ async function before_router() {
             return _menu.includes(item.path)
         }
     })
-    // 取出所有_router中的元素的path, 组成新的列表, 用于判断
-    const all_path = _router.map(item => item.path)
-    // 当前页面不在权限列表内则跳转到首页(改成调到登录页)
-    let list_white_path_qianduan = ['/auth/login', '/auth/passwdForget', '/auth/singup', '/', '/home/searchLog', '/home/links']
+    // 当前页面不在权限列表内则跳转到首页
+    let list_white_path_qianduan = ['/auth/login', '/auth/passwdForget', '/auth/singup', '/', '/home/ldapServers']
     let last_menu_list = last_menu.map(item => item.path).concat(list_white_path_qianduan)
     // console.log("当前有权限的路由列表: ", last_menu_list)
     // console.log("当前取得的页面路径: ", window.location.pathname)
-    let now_path = window.location.pathname
-    if (!last_menu_list.includes(now_path)) {
+    if (!last_menu_list.includes(window.location.pathname)) {
         // console.log("触发了跳转: ", window.location.pathname)
         // router.push('/')
-        // console.log("当前页面无权限, 跳转到登录页: ", window.location.pathname)
-        // 如果页面在所有所有路由里, 但是不在该用户权限列表里, 则跳转到登录页的同时, 附带to参数, 否则仅跳转至首页
-        if (all_path.includes(now_path)) {
-            console.log("当前页面无权限, 跳转到登录页")
-            window.location.replace('/auth/login?to=' + now_path + window.location.search)
-        } else {
-            console.log("当前页面不存在, 跳转到首页: ", '/')
-            window.location.replace('/')
-        }
-
+        window.location.replace('/')
     }
 
     console.log("生成有权限的路由: ", last_menu)

@@ -245,11 +245,7 @@
       <el-avatar v-if="imageUrl&&imageUrl!='undefined'" :size="32" class="mr-3" :src="imageUrl" />
     </div>
     <div class="div_photo_list">
-      <el-button
-          v-if="props.upload" class="btn_upload" type="primary" @click="btn_upload" :loading="status_btn_upload" :disabled="!data_request.user_photo_base64"
-      >
-        上传
-      </el-button>
+      <el-button v-if="props.upload" class="btn_upload" type="primary" @click="btn_upload" :loading="status_btn_upload" >上传</el-button>
       <el-image class="photo_default" v-for="i in photo_list_default" :src="i" @click="btn_replace(i)"/>
     </div>
   </div>
